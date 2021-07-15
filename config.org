@@ -1,0 +1,78 @@
+* Toolbar, Menu Bar, Scroll Bar, Startup Message Off
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq inhibit-startup-message t)
+#+END_SRC
+* Remove Trailing Whitespace
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
+* Ivy
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy
+    :ensure t
+    :config (ivy-mode))
+#+END_SRC
+* Save current.file~ in alternate directory
+#+BEGIN_SRC emacs-lisp
+  (setq save-place-file (concat user-emacs-directory "places"))
+  (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
+						 "backups"))))
+#+END_SRC
+* Swiper
+#+BEGIN_SRC emacs-lisp
+  (use-package swiper
+    :after ivy
+    :bind (("C-s" . swiper)
+	   ("C-r" . swiper)))
+#+END_SRC
+* Confirm on Exit
+#+BEGIN_SRC emacs-lisp
+  (setq confirm-kill-emacs 'y-or-n-p)
+#+END_SRC
+* Counsel Projectile
+#+BEGIN_SRC emacs-lisp
+  (use-package counsel-projectile
+    :ensure t
+    :bind ("C-c p" . projectile-command-map)
+    :config (counsel-projectile-mode))
+#+END_SRC
+* Company
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :ensure t
+    :config
+    (setq company-idle-delay 0.1)
+    (global-company-mode t))
+#+END_SRC
+* Yasnippet
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :config
+    (yas-reload-all)
+    (yas-global-mode))
+
+  (use-package yasnippet-snippets
+    :ensure t)
+#+END_SRC
+* Flycheck
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
+#+END_SRC
+* LSP Mode
+#+BEGIN_SRC emacs-lisp
+  (use-package lsp-mode
+    :commands lsp
+    :ensure t)
+#+END_SRC
+* LSP UI
+#+BEGIN_SRC emacs-lisp
+  (use-package lsp-ui
+    :commands lsp-ui-mode
+    :ensure t)
+#+END_SRC
